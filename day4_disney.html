@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 4 · 東京迪士尼樂園攻略 6/24</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0b1120;
+    --bg2:      #131c30;
+    --card:     #1a2540;
+    --border:   #253356;
+    --pink:     #ff6fa3;
+    --mint:     #3fe0d0;
+    --gold:     #ffd24d;
+    --purple:   #b57cff;
+    --red:      #ff5c7a;
+    --green:    #43d98c;
+    --blue:     #4fa3ff;
+    --text:     #e8eef8;
+    --muted:    #8899bb;
+    --radius:   14px;
+    --shadow:   0 4px 24px rgba(0,0,0,.45);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+
+  /* ── STARS BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 42% 8%,  rgba(255,255,255,.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 70% 35%, rgba(255,209,77,.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 15%, rgba(255,255,255,.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 55% 78%, rgba(63,224,208,.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 65%, rgba(255,255,255,.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5%  85%, rgba(255,255,255,.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 93% 88%, rgba(181,124,255,.5) 0%, transparent 100%);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; z-index: 1;
+    background: linear-gradient(160deg, #0d1a3a 0%, #1a0d2e 50%, #0d1a2a 100%);
+    padding: 32px 20px 0;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    display: block;
+    height: 48px;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    margin-top: -4px;
+  }
+
+  /* Castle SVG */
+  .castle-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: -10px;
+  }
+  .castle-glow {
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 200px; height: 80px;
+    background: radial-gradient(ellipse, rgba(255,210,77,.25) 0%, transparent 70%);
+    filter: blur(8px);
+  }
+
+  .day-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: #fff;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Fredoka One', sans-serif;
+    font-size: clamp(26px, 7vw, 40px);
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+  .hero-sub {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+  .event-banner {
+    background: linear-gradient(90deg, rgba(255,111,163,.15), rgba(181,124,255,.15));
+    border: 1px solid rgba(255,111,163,.3);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--pink);
+    margin: 0 auto 20px;
+    max-width: 420px;
+    font-weight: 700;
+  }
+  .event-banner span { color: var(--muted); font-weight: 400; }
+
+  /* ── NAV TABS ── */
+  .tabs-sticky {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(11,17,32,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 4px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .tabs-sticky::-webkit-scrollbar { display: none; }
+  .tabs-sticky a {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 12px 12px;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  .tabs-sticky a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ── SECTIONS ── */
+  .section { position: relative; z-index: 1; padding: 24px 16px 4px; max-width: 640px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 22px;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title .ico { font-size: 26px; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin-bottom: 10px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { padding: 0 16px; max-width: 640px; margin: 0 auto; position: relative; z-index: 1; }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 60px 20px 1fr;
+    gap: 0 12px;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .tl-time {
+    text-align: right;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--gold);
+    padding-top: 12px;
+    line-height: 1.2;
+  }
+  .tl-dot-col { display: flex; flex-direction: column; align-items: center; }
+  .tl-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 8px rgba(255,210,77,.6);
+    margin-top: 14px;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .tl-dot.pink  { background: var(--pink);   box-shadow: 0 0 8px rgba(255,111,163,.6); }
+  .tl-dot.mint  { background: var(--mint);   box-shadow: 0 0 8px rgba(63,224,208,.6); }
+  .tl-dot.purple{ background: var(--purple); box-shadow: 0 0 8px rgba(181,124,255,.6); }
+  .tl-dot.red   { background: var(--red);    box-shadow: 0 0 8px rgba(255,92,122,.6); }
+  .tl-line {
+    flex: 1;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--border), transparent);
+    margin-top: 2px;
+  }
+  .tl-content {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    min-height: 42px;
+  }
+  .tl-content strong { font-size: 13.5px; display: block; margin-bottom: 2px; }
+  .tl-content p { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.5; }
+  .tl-content .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 6px;
+    margin-right: 4px;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  .tag-dpa  { background: rgba(255,92,122,.2);  color: var(--red);    border: 1px solid rgba(255,92,122,.3); }
+  .tag-pp   { background: rgba(67,217,140,.2);  color: var(--green);  border: 1px solid rgba(67,217,140,.3); }
+  .tag-show { background: rgba(181,124,255,.2); color: var(--purple); border: 1px solid rgba(181,124,255,.3); }
+  .tag-food { background: rgba(255,210,77,.2);  color: var(--gold);   border: 1px solid rgba(255,210,77,.3); }
+  .tag-alert{ background: rgba(255,111,163,.15);color: var(--pink);   border: 1px solid rgba(255,111,163,.3); }
+
+  /* ── STRATEGY BOX ── */
+  .strategy {
+    background: linear-gradient(135deg, rgba(255,92,122,.08), rgba(181,124,255,.08));
+    border: 1px solid rgba(181,124,255,.3);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .strategy h3 {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--purple);
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin-bottom: 10px;
+  }
+  .phone-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .phone-box {
+    background: var(--bg2);
+    border-radius: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+  }
+  .phone-box .ph-label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    margin-bottom: 6px;
+  }
+  .ph-a { color: var(--red); }
+  .ph-b { color: var(--green); }
+  .phone-box p { font-size: 12px; color: var(--text); line-height: 1.5; }
+  .phone-box .en { font-size: 11px; color: var(--muted); font-style: italic; }
+
+  .rule-box {
+    margin-top: 10px;
+    background: rgba(255,210,77,.07);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: var(--gold);
+    line-height: 1.6;
+  }
+
+  /* ── TABLE ── */
+  .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 460px; }
+  th {
+    background: var(--bg2);
+    color: var(--muted);
+    text-transform: uppercase;
+    font-size: 10.5px;
+    letter-spacing: .6px;
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 9px 10px;
+    border-bottom: 1px solid rgba(37,51,86,.6);
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,.02); }
+  .en-name { font-size: 11px; color: var(--mint); font-style: italic; display: block; margin-top: 1px; }
+  .stars { color: var(--gold); font-size: 11px; letter-spacing: -1px; }
+
+  /* Priority badges */
+  .p-dpa   { color: var(--red);   font-weight: 800; }
+  .p-pp    { color: var(--green); font-weight: 800; }
+  .p-std   { color: var(--muted); }
+
+  /* ── SHOW CARD ── */
+  .show-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .show-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 4px;
+  }
+  .show-card.night::before { background: var(--purple); }
+  .show-card.parade::before { background: var(--pink); }
+  .show-card.dining::before { background: var(--gold); }
+  .show-title { font-weight: 800; font-size: 14px; margin-bottom: 2px; }
+  .show-en { font-size: 11.5px; color: var(--mint); font-style: italic; margin-bottom: 8px; }
+  .show-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .meta-pill {
+    background: rgba(255,255,255,.06);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 9px;
+    font-size: 11px;
+    color: var(--text);
+  }
+  .meta-pill strong { color: var(--gold); }
+  .show-body { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+  .show-body b { color: var(--text); }
+  .tip-inline {
+    margin-top: 8px;
+    font-size: 12px;
+    background: rgba(63,224,208,.07);
+    border-left: 3px solid var(--mint);
+    border-radius: 0 6px 6px 0;
+    padding: 6px 10px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* ── FOOD GRID ── */
+  .food-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .food-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+  }
+  .food-card .fc-name { font-weight: 800; font-size: 13px; margin-bottom: 2px; }
+  .food-card .fc-en  { font-size: 10.5px; color: var(--mint); font-style: italic; margin-bottom: 6px; }
+  .food-card .fc-price { font-size: 12px; color: var(--gold); font-weight: 700; }
+  .food-card .fc-note  { font-size: 11.5px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+  .food-card.highlight { border-color: rgba(255,210,77,.35); background: rgba(255,210,77,.05); }
+
+  /* Budget */
+  .budget-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .budget-row:last-child { border-bottom: none; }
+  .budget-row .label { color: var(--muted); }
+  .budget-row .amount { font-weight: 700; color: var(--text); text-align: right; }
+  .budget-row.total .label { color: var(--gold); font-weight: 800; }
+  .budget-row.total .amount { color: var(--gold); font-size: 16px; }
+  .budget-row.paid .amount { color: var(--green); }
+
+  /* ── WARN BOX ── */
+  .warn-box {
+    background: rgba(255,111,163,.07);
+    border: 1px solid rgba(255,111,163,.25);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .warn-box h4 { font-size: 12px; font-weight: 800; color: var(--pink); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 6px; }
+  .warn-box ul { padding-left: 14px; }
+  .warn-box li { font-size: 12.5px; color: var(--text); line-height: 1.7; }
+  .warn-box li::marker { color: var(--pink); }
+
+  .note-box {
+    background: rgba(63,224,208,.06);
+    border: 1px solid rgba(63,224,208,.2);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .note-box h4 { font-size: 12px; font-weight: 800; color: var(--mint); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 6px; }
+  .note-box ul { padding-left: 14px; }
+  .note-box li { font-size: 12.5px; color: var(--text); line-height: 1.7; }
+  .note-box li::marker { color: var(--mint); }
+
+  /* ── BILINGUAL TABLE ── */
+  .bi-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .bi-table th { background: var(--bg2); color: var(--muted); font-size: 10.5px; text-transform: uppercase; letter-spacing: .6px; padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+  .bi-table td { padding: 8px 10px; border-bottom: 1px solid rgba(37,51,86,.5); vertical-align: middle; line-height: 1.4; }
+  .bi-table tr:last-child td { border-bottom: none; }
+  .bi-table .app-name { color: var(--mint); font-weight: 700; font-style: italic; }
+  .bi-table .jp-name  { color: var(--muted); font-size: 11px; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 24px 0 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 20px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  /* ── SPARKLE ANIMATION ── */
+  @keyframes twinkle {
+    0%, 100% { opacity: .3; transform: scale(1); }
+    50%       { opacity: 1;  transform: scale(1.4); }
+  }
+  .sparkle {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: twinkle 2.4s ease-in-out infinite;
+    box-shadow: 0 0 4px var(--gold);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 420px) {
+    .phone-grid { grid-template-columns: 1fr; }
+    .food-grid  { grid-template-columns: 1fr; }
+    table { min-width: 380px; font-size: 11px; }
+    th, td { padding: 7px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="day-badge">6/24（三）· Day 4</div>
+  <h1>東京迪士尼樂園<br>Tokyo Disneyland</h1>
+  <p class="hero-sub">訂單 A00580296879 · 2大人＋2小孩 · 平日入場</p>
+
+  <!-- Castle SVG -->
+  <div class="castle-wrap">
+    <div class="castle-glow"></div>
+    <svg viewBox="0 0 320 160" width="280" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto;">
+      <!-- main towers -->
+      <rect x="140" y="20" width="40" height="100" fill="#1c2d50" rx="2"/>
+      <polygon points="140,20 160,2 180,20" fill="#b57cff"/>
+      <!-- left tower -->
+      <rect x="90" y="50" width="28" height="70" fill="#162240" rx="2"/>
+      <polygon points="90,50 104,36 118,50" fill="#7c4dff"/>
+      <!-- right tower -->
+      <rect x="202" y="50" width="28" height="70" fill="#162240" rx="2"/>
+      <polygon points="202,50 216,36 230,50" fill="#7c4dff"/>
+      <!-- far left -->
+      <rect x="55" y="70" width="20" height="50" fill="#111a33" rx="1"/>
+      <polygon points="55,70 65,60 75,70" fill="#5c35cc"/>
+      <!-- far right -->
+      <rect x="245" y="70" width="20" height="50" fill="#111a33" rx="1"/>
+      <polygon points="245,70 255,60 265,70" fill="#5c35cc"/>
+      <!-- base walls -->
+      <rect x="60" y="100" width="200" height="20" fill="#1a2645" rx="2"/>
+      <!-- windows -->
+      <rect x="152" y="40" width="16" height="20" fill="#ffd24d" rx="2" opacity=".7"/>
+      <rect x="97" y="65" width="10" height="14" fill="#ffd24d" rx="1" opacity=".5"/>
+      <rect x="213" y="65" width="10" height="14" fill="#ffd24d" rx="1" opacity=".5"/>
+      <!-- gate -->
+      <rect x="148" y="100" width="24" height="20" fill="#0d1525" rx="2"/>
+      <!-- ground glow -->
+      <ellipse cx="160" cy="120" rx="80" ry="10" fill="rgba(181,124,255,.12)"/>
+    </svg>
+
+    <!-- sparkles -->
+    <div class="sparkle" style="top:5px;left:130px;animation-delay:0s;width:3px;height:3px;background:var(--pink)"></div>
+    <div class="sparkle" style="top:12px;left:195px;animation-delay:.7s;"></div>
+    <div class="sparkle" style="top:30px;left:240px;animation-delay:1.3s;width:3px;height:3px;background:var(--mint)"></div>
+    <div class="sparkle" style="top:18px;left:75px;animation-delay:.4s;"></div>
+  </div>
+
+  <div class="event-banner">
+    🍬 當期限定活動 Disney Pal-A-Palooza<br>
+    <span>"Vanellope's Sweet Pop World"｜4/9–6/30</span>
+  </div>
+</div>
+
+<!-- STICKY NAV -->
+<nav class="tabs-sticky">
+  <a href="#timeline">⏰ 時間軸</a>
+  <a href="#rides">🎢 設施</a>
+  <a href="#shows">🎭 表演</a>
+  <a href="#parade">🎉 遊行</a>
+  <a href="#food">🍽️ 美食</a>
+  <a href="#bilingual">🗺️ 中英對照</a>
+  <a href="#notes">⚠️ 提醒</a>
+  <a href="#budget">💰 預算</a>
+</nav>
+
+<!-- ═══════════════ TIMELINE ═══════════════ -->
+<section id="timeline" class="section">
+  <h2 class="section-title"><span class="ico">⏰</span> 全天時間軸</h2>
+</section>
+<div class="timeline">
+
+  <div class="tl-item">
+    <div class="tl-time">07:15</div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>飯店早餐＋裝備確認</strong>
+      <p>行動電源充滿·備輕便雨衣×4·孩子名牌掛好</p>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">08:00</div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>舞浜ビューホテル 出發</strong>
+      <p>步行或度假區單軌至樂園入口，預留安檢 20 分</p>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">08:30</div>
+    <div class="tl-dot-col"><div class="tl-dot red"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>🚪 正式開園·掃票入場</strong>
+      <p>⚡ 雙手機同步作戰立刻啟動</p>
+      <span class="tag tag-dpa">DPA 開搶</span><span class="tag tag-pp">PP 第1輪</span>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">08:35</div>
+    <div class="tl-dot-col"><div class="tl-dot red"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>🌹 美女與野獸（DPA）＋ 維尼熊（PP第1輪）</strong>
+      <p>手機A買DPA，手機B同時搶PP·4張票必須一起操作</p>
+      <span class="tag tag-dpa">Disney Premier Access</span>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">09:30</div>
+    <div class="tl-dot-col"><div class="tl-dot mint"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>設施衝刺時段</strong>
+      <p>PP第2輪（怪獸電力公司）·PP第3輪（巴斯光年）·標準等待設施</p>
+      <span class="tag tag-pp">Priority Pass ×2</span>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">11:30</div>
+    <div class="tl-dot-col"><div class="tl-dot" style="background:var(--gold)"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>🍽️ 午餐 Crystal Palace Restaurant</strong>
+      <p>クリスタルパレス·主題 Buffet·避開12:00高峰</p>
+      <span class="tag tag-food">Priority Seating 預約</span>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">13:00</div>
+    <div class="tl-dot-col"><div class="tl-dot mint"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>下午設施＋爆米花桶採購</strong>
+      <p>遊行前人少的設施·買角色爆米花桶·補充能量</p>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">~13:30</div>
+    <div class="tl-dot-col"><div class="tl-dot pink"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>佔位準備（遊行開始1小時前）</strong>
+      <p>一人持野餐墊先佔位，其餘繼續玩設施</p>
+      <span class="tag tag-alert">15分前全員歸位</span>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">~14:30</div>
+    <div class="tl-dot-col"><div class="tl-dot pink"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>🍬 遊行「It's a Sweets Full Time!」</strong>
+      <p>ヴァネロペ糖果花車登場·約20–30分·6/30前限定</p>
+      <span class="tag tag-show">Pal-A-Palooza Parade</span>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">15:30</div>
+    <div class="tl-dot-col"><div class="tl-dot mint"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>遊行後黃金時段·角色見面＋補刷設施</strong>
+      <p>人潮往餐廳移動，設施等待縮短·Minnie's Style Studio</p>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">18:00</div>
+    <div class="tl-dot-col"><div class="tl-dot" style="background:var(--gold)"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>🌙 晚餐</strong>
+      <p>煙火秀前補能量·或秀後人潮退去再用餐</p>
+      <span class="tag tag-food">La Taverne de Gaston 推薦</span>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">~19:45</div>
+    <div class="tl-dot-col"><div class="tl-dot purple"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>城堡前卡位（秀前30分）</strong>
+      <p>幽靈公館旁·鋪野餐墊·帶孩子好視野位置</p>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">~20:15</div>
+    <div class="tl-dot-col"><div class="tl-dot purple"></div><div class="tl-line"></div></div>
+    <div class="tl-content">
+      <strong>🔦 Reach for the Stars 夜間城堡投影秀</strong>
+      <p>約20分·城堡投影＋煙火·今日行程壓軸</p>
+      <span class="tag tag-show">~20 min · 以 App 當日時間為準</span>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-time">21:00</div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line" style="background:transparent"></div></div>
+    <div class="tl-content">
+      <strong>返回舞浜飯店</strong>
+      <p>步行或度假區單軌·孩子今天一定睡死</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ RIDES ═══════════════ -->
+<section id="rides" class="section">
+  <h2 class="section-title"><span class="ico">🎢</span> 設施攻略</h2>
+
+  <!-- Strategy -->
+  <div class="strategy">
+    <h3>⚡ 開園5分鐘雙手機作戰SOP</h3>
+    <div class="phone-grid">
+      <div class="phone-box">
+        <div class="ph-label ph-a">📱 大人A</div>
+        <p>立刻購買 <b>DPA</b><br>美女と野獣<br>
+        <span class="en">Beauty and the Beast:<br>Magical Story</span></p>
+        <p style="margin-top:6px;font-size:11px;color:var(--muted)">→ App → Premier Access<br>→ 選4張票 → 付款<br>→ 選最早可用時段</p>
+      </div>
+      <div class="phone-box">
+        <div class="ph-label ph-b">📱 大人B</div>
+        <p>同時搶 <b>PP第1輪</b><br>くまのプーさん<br>
+        <span class="en">Pooh's Hunny Hunt</span></p>
+        <p style="margin-top:6px;font-size:11px;color:var(--muted)">→ App → Priority Pass<br>→ 選4張票全選<br>→ 最先填滿·必搶</p>
+      </div>
+    </div>
+    <div class="rule-box">
+      🔑 <b>3大原則</b><br>
+      ① DPA 必須掃票進場後才能購買，入口外無效<br>
+      ② PP的4張票必須一起操作，切勿各自分頭搶<br>
+      ③ PP用完一輪，冷卻後立刻搶下一輪（共3輪）
+    </div>
+  </div>
+
+  <!-- Attraction Table -->
+  <div class="card">
+    <div class="card-title">設施優先順序</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>設施名稱</th>
+            <th>8歲</th>
+            <th>6歲</th>
+            <th>取票方式</th>
+            <th>建議時段</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="stars">⭐⭐⭐</span> 美女與野獸<br>
+              <span class="en-name">Beauty and the Beast: Magical Story</span>
+            </td>
+            <td>✅</td><td>✅</td>
+            <td class="p-dpa">DPA ¥1,500/人</td>
+            <td>開園後最早時段</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="stars">⭐⭐⭐</span> 維尼熊獵蜜記<br>
+              <span class="en-name">Pooh's Hunny Hunt</span>
+            </td>
+            <td>✅</td><td>✅</td>
+            <td class="p-pp">PP 第1輪（免費）</td>
+            <td>開園即搶·填最快</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="stars">⭐⭐⭐</span> 怪獸電力公司<br>
+              <span class="en-name">Monsters, Inc. Ride &amp; Go Seek!</span>
+            </td>
+            <td>✅</td><td>✅</td>
+            <td class="p-pp">PP 第2輪（免費）</td>
+            <td>第1輪用完後即搶</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="stars">⭐⭐⭐</span> 巴斯光年星際歷險<br>
+              <span class="en-name">Buzz Lightyear's Astro Blasters</span>
+            </td>
+            <td>✅</td><td>✅</td>
+            <td class="p-pp">PP 第3輪（免費）</td>
+            <td>下午空檔</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="stars">⭐⭐</span> 鬼屋<br>
+              <span class="en-name">Haunted Mansion</span>
+            </td>
+            <td>✅</td><td>△怕黑?</td>
+            <td class="p-std">一般等待</td>
+            <td>遊行後人少時</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="stars">⭐⭐</span> 飛濺山<br>
+              <span class="en-name">Splash Mountain</span>
+            </td>
+            <td>✅</td><td>✅</td>
+            <td class="p-std">一般等待</td>
+            <td>下午·備換洗衣物</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="stars">⭐⭐</span> 太空山<br>
+              <span class="en-name">Space Mountain</span>
+            </td>
+            <td>✅</td><td>✅ 102cm↑</td>
+            <td class="p-std">一般等待</td>
+            <td>遊行後</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="stars">⭐</span> 小小世界<br>
+              <span class="en-name">It's a Small World</span>
+            </td>
+            <td>✅</td><td>✅</td>
+            <td class="p-std">一般等待</td>
+            <td>午後休息補眠·有冷氣</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <h4>💡 遊行中是衝刺好時機</h4>
+    <ul>
+      <li>遊行進行時人群集中在路線兩側，熱門設施等候時間明顯下降</li>
+      <li>「小小世界」是下午孩子電量不足時的救命稻草——全室內有冷氣，慢速船遊，大人也可瞇一下</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ SHOWS ═══════════════ -->
+<section id="shows" class="section">
+  <h2 class="section-title"><span class="ico">🎭</span> 表演</h2>
+
+  <div class="show-card night">
+    <div class="show-title">🔦 Reach for the Stars</div>
+    <div class="show-en">夜間城堡投影秀 · Night Castle Projection Show</div>
+    <div class="show-meta">
+      <span class="meta-pill">⏱ 約<strong>20分鐘</strong></span>
+      <span class="meta-pill">📍 <strong>Cinderella Castle</strong></span>
+      <span class="meta-pill">🕐 約<strong>20:15</strong>（以App為準）</span>
+    </div>
+    <div class="show-body">
+      以灰姑娘城堡為舞台的投影映射＋煙火＋光效夜間秀。<b>史上首次加入漫威角色</b>，煙霧演出可能輕微沾濕前排。
+      今日壓軸節目，是帶孩子感受迪士尼夜晚魔力的最佳時刻。
+    </div>
+    <div class="tip-inline">
+      👨‍👩‍👧‍👦 親子佔位推薦：<b>幽靈公館（Haunted Mansion）旁</b>——視野佳、人群壓力小、看完孩子不用擠人群走很遠。鋪野餐墊，秀前30分到位。
+    </div>
+  </div>
+
+  <div class="show-card dining">
+    <div class="show-title">🍖 Polynesian Terrace Restaurant 表演秀</div>
+    <div class="show-en">ポリネシアンテラスレストラン · Dining Entertainment</div>
+    <div class="show-meta">
+      <span class="meta-pill">⏱ 約<strong>55分鐘</strong></span>
+      <span class="meta-pill">📍 <strong>Adventureland</strong></span>
+      <span class="meta-pill">需<strong>事先預約</strong></span>
+    </div>
+    <div class="show-body">用餐中觀看現場表演，適合晚餐時段。需透過 App→Priority Seating 事先訂位，未預約難進場。</div>
+  </div>
+
+  <div class="show-card parade">
+    <div class="show-title">👗 Minnie's Style Studio 角色見面</div>
+    <div class="show-en">ミニーのスタイルスタジオ · Character Greeting</div>
+    <div class="show-meta">
+      <span class="meta-pill">📍 <strong>Fantasyland</strong></span>
+      <span class="meta-pill">有官方攝影師</span>
+    </div>
+    <div class="show-body">與米妮近距離拍照，附官方攝影師拍攝服務，小女孩最愛。下午設施空檔安排，等候時間通常15–30分。</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ PARADE ═══════════════ -->
+<section id="parade" class="section">
+  <h2 class="section-title"><span class="ico">🎉</span> 遊行</h2>
+
+  <div class="show-card parade">
+    <div class="show-title">🍬 It's a Sweets Full Time!</div>
+    <div class="show-en">イッツ・ア・スウィーツフルタイム！· Pal-A-Palooza Parade</div>
+    <div class="show-meta">
+      <span class="meta-pill">⏱ 約<strong>20–30分</strong></span>
+      <span class="meta-pill">平日<strong>1次/天</strong></span>
+      <span class="meta-pill">期限<strong>6/30止</strong></span>
+    </div>
+    <div class="show-body">
+      2026年4/9–6/30限定遊行，以ヴァネロペ糖果世界為主題。超彩色糖果花車依序經過，ヴァネロペ·米奇等角色同台，孩子看到會跳起來。
+      <b>你們是最後一週入園，此限定遊行的稀有度拉滿。</b>
+    </div>
+    <div class="tip-inline">
+      <b>親子佔位策略：</b><br>
+      ① 遊行開始前<b>1小時</b>先鋪野餐墊佔位（遊行前1小時才開放鋪墊）<br>
+      ② 一大人留守，另一大人帶孩子繼續玩設施<br>
+      ③ 遊行開始前<b>15分鐘</b>全員歸位<br>
+      ④ 推薦位置：<b>Toontown 出口附近</b>——路線末段角色轉向揮手，背景漂亮好拍
+    </div>
+  </div>
+
+  <div class="warn-box">
+    <h4>⚠️ 遊行時間確認</h4>
+    <ul>
+      <li>精確時間以入園當天 App →「Show &amp; Parade Schedule」為準</li>
+      <li>梅雨季強降雨時遊行可能調整，App 會即時推播</li>
+      <li>DPA 付費觀賞區在城堡正前方圓環；一般免費區需更早佔位</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ FOOD ═══════════════ -->
+<section id="food" class="section">
+  <h2 class="section-title"><span class="ico">🍽️</span> 美食</h2>
+
+  <!-- Lunch -->
+  <div class="card">
+    <div class="card-title" style="color:var(--gold)">🌟 午餐首選 · Crystal Palace Restaurant</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">クリスタルパレス・レストラン · Adventureland · Buffet 自助餐</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>用餐人</th><th>票價 (JPY)</th><th>你們計算</th><th>台幣</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>大人（18歲↑）</td><td>¥5,800</td><td>×2 = ¥11,600</td><td>NT$2,436</td></tr>
+          <tr><td>小學生（8歲）</td><td>¥2,500</td><td>×1 = ¥2,500</td><td>NT$525</td></tr>
+          <tr><td>幼兒（6歲）</td><td>¥1,500</td><td>×1 = ¥1,500</td><td>NT$315</td></tr>
+          <tr style="background:rgba(255,210,77,.06)">
+            <td><b>4人合計</b></td><td></td>
+            <td><b>¥15,600</b></td><td><b>NT$3,276</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip-inline" style="margin-top:10px;">
+      ✅ <b>為什麼選這裡：</b>Buffet自取·偏食孩子不用糾結菜單·活動限定主題菜色·室內冷氣讓全家坐著充電<br>
+      📱 訂位：App → <b>Priority Seating</b> → Crystal Palace Restaurant → 選11:30場次
+    </div>
+  </div>
+
+  <!-- Snacks -->
+  <div class="card">
+    <div class="card-title">🍿 必買零食·點心</div>
+    <div class="food-grid">
+      <div class="food-card highlight">
+        <div class="fc-name">🍿 角色爆米花桶</div>
+        <div class="fc-en">Character Popcorn Bucket</div>
+        <div class="fc-price">¥2,600–3,200（含桶）</div>
+        <div class="fc-note">全天重複補充，補充桶約¥500–700，既是點心也是紀念品，CP值最高</div>
+      </div>
+      <div class="food-card">
+        <div class="fc-name">🧁 活動限定甜點</div>
+        <div class="fc-en">Pal-A-Palooza Sweet</div>
+        <div class="fc-price">¥900–1,100</div>
+        <div class="fc-note">ヴァネロペ糖果主題限定口味，6/30後就沒了</div>
+      </div>
+      <div class="food-card">
+        <div class="fc-name">🍦 迪士尼冰淇淋</div>
+        <div class="fc-en">Disney Ice Cream</div>
+        <div class="fc-price">¥500–800</div>
+        <div class="fc-note">卡通造型，孩子必崩潰要拍照</div>
+      </div>
+      <div class="food-card">
+        <div class="fc-name">🥤 活動限定飲品</div>
+        <div class="fc-en">Event Limited Drinks</div>
+        <div class="fc-price">¥900 起</div>
+        <div class="fc-note">スクウィーザーズ等多點販售</div>
+      </div>
+    </div>
+    <div class="rule-box" style="margin-top:0">
+      💡 <b>爆米花桶策略</b>：早上進場先買一個桶，全天邊走邊補充不同口味（各區口味不同）。有米奇·維尼熊·各種角色款式。
+    </div>
+  </div>
+
+  <!-- Dinner -->
+  <div class="card">
+    <div class="card-title">🌙 晚餐選項</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>餐廳</th><th>App英文名</th><th>特色</th><th>預算/4人</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>美女與野獸主題餐廳</td>
+            <td class="en-name">La Taverne de Gaston</td>
+            <td>DPA後順路打卡·Fantasyland</td>
+            <td>¥4,000–6,000</td>
+          </tr>
+          <tr>
+            <td>波里尼西亞餐廳秀</td>
+            <td class="en-name">Polynesian Terrace Restaurant</td>
+            <td>邊吃邊看表演，需事先預約</td>
+            <td>¥12,000–16,000</td>
+          </tr>
+          <tr>
+            <td>愛麗絲主題餐廳</td>
+            <td class="en-name">Queen of Hearts Banquet Hall</td>
+            <td>Fantasyland·孩子喜歡主題</td>
+            <td>¥6,000–9,000</td>
+          </tr>
+          <tr>
+            <td>各區美食廣場</td>
+            <td class="en-name">Food Court / Mobile Order</td>
+            <td>彈性最大·支援Mobile Order</td>
+            <td>¥4,000–7,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ BILINGUAL ═══════════════ -->
+<section id="bilingual" class="section">
+  <h2 class="section-title"><span class="ico">🗺️</span> App 中英日對照速查</h2>
+
+  <div class="card">
+    <div class="card-title">🎢 設施 Attractions</div>
+    <div class="tbl-wrap">
+      <table class="bi-table">
+        <thead><tr><th>App顯示（英文）</th><th>日文</th><th>中文</th></tr></thead>
+        <tbody>
+          <tr><td class="app-name">Beauty and the Beast: Magical Story</td><td class="jp-name">美女と野獣〜魔法のものがたり〜</td><td>美女與野獸</td></tr>
+          <tr><td class="app-name">Pooh's Hunny Hunt</td><td class="jp-name">くまのプーさんのハニーハント</td><td>維尼熊獵蜜記</td></tr>
+          <tr><td class="app-name">Monsters, Inc. Ride &amp; Go Seek!</td><td class="jp-name">モンスターズ・インク「ライド＆ゴーシーク！」</td><td>怪獸電力公司</td></tr>
+          <tr><td class="app-name">Buzz Lightyear's Astro Blasters</td><td class="jp-name">バズ・ライトイヤーのアストロブラスター</td><td>巴斯光年星際歷險</td></tr>
+          <tr><td class="app-name">Haunted Mansion</td><td class="jp-name">ホーンテッドマンション</td><td>鬼屋</td></tr>
+          <tr><td class="app-name">Splash Mountain</td><td class="jp-name">スプラッシュ・マウンテン</td><td>飛濺山</td></tr>
+          <tr><td class="app-name">Space Mountain</td><td class="jp-name">スペース・マウンテン</td><td>太空山</td></tr>
+          <tr><td class="app-name">It's a Small World</td><td class="jp-name">イッツ・ア・スモール・ワールド</td><td>小小世界</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🍽️ 餐廳 Restaurants</div>
+    <div class="tbl-wrap">
+      <table class="bi-table">
+        <thead><tr><th>App顯示（英文）</th><th>日文</th><th>備註</th></tr></thead>
+        <tbody>
+          <tr><td class="app-name">Crystal Palace Restaurant</td><td class="jp-name">クリスタルパレス・レストラン</td><td>Buffet·活動主題菜單</td></tr>
+          <tr><td class="app-name">Polynesian Terrace Restaurant</td><td class="jp-name">ポリネシアンテラスレストラン</td><td>用餐看表演</td></tr>
+          <tr><td class="app-name">Queen of Hearts Banquet Hall</td><td class="jp-name">クイーン・オブ・ハートのバンケットホール</td><td>愛麗絲主題</td></tr>
+          <tr><td class="app-name">La Taverne de Gaston</td><td class="jp-name">ラ・タベルヌ・ド・ガストン</td><td>美女與野獸主題</td></tr>
+          <tr><td class="app-name">Hungry Bear Restaurant</td><td class="jp-name">ハングリーベア・レストラン</td><td>支援 Mobile Order</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🎭 表演＆分區 Entertainment &amp; Lands</div>
+    <div class="tbl-wrap">
+      <table class="bi-table">
+        <thead><tr><th>App顯示（英文）</th><th>日文</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td class="app-name">Reach for the Stars</td><td class="jp-name">リーチ・フォー・ザ・スターズ</td><td>夜間城堡投影秀</td></tr>
+          <tr><td class="app-name">It's a Sweets Full Time!</td><td class="jp-name">イッツ・ア・スウィーツフルタイム！</td><td>限定遊行</td></tr>
+          <tr><td class="app-name">Minnie's Style Studio</td><td class="jp-name">ミニーのスタイルスタジオ</td><td>角色見面會</td></tr>
+          <tr><td class="app-name">Disney Premier Access</td><td class="jp-name">ディズニー・プレミアアクセス</td><td>DPA·付費優先</td></tr>
+          <tr><td class="app-name">Priority Pass</td><td class="jp-name">プライオリティパス</td><td>PP·免費搶票</td></tr>
+          <tr><td class="app-name">Priority Seating</td><td class="jp-name">プライオリティ・シーティング</td><td>餐廳訂位</td></tr>
+          <tr><td class="app-name">Mobile Order</td><td class="jp-name">モバイルオーダー</td><td>餐點預點不排隊</td></tr>
+          <tr><td class="app-name">Westernland</td><td class="jp-name">ウェスタンランド</td><td>⚠️ 非 Frontierland</td></tr>
+          <tr><td class="app-name">Fantasyland</td><td class="jp-name">ファンタジーランド</td><td>維尼熊·美女與野獸</td></tr>
+          <tr><td class="app-name">Tomorrowland</td><td class="jp-name">トゥモローランド</td><td>怪獸電力公司·巴斯光年</td></tr>
+          <tr><td class="app-name">World Bazaar</td><td class="jp-name">ワールドバザール</td><td>入口大街·全室內</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ NOTES ═══════════════ -->
+<section id="notes" class="section">
+  <h2 class="section-title"><span class="ico">⚠️</span> 特別注意事項</h2>
+
+  <div class="warn-box">
+    <h4>🔋 電力管理</h4>
+    <ul>
+      <li>行動電源兩顆（大人各一），App 全天開耗電驚人</li>
+      <li>夜間秀約 20:15，從入場到結束超過 12 小時</li>
+      <li>開園前確保兩支手機都是滿電</li>
+    </ul>
+  </div>
+
+  <div class="warn-box">
+    <h4>☔ 梅雨日應對</h4>
+    <ul>
+      <li>美女與野獸·維尼熊·怪獸電力公司·巴斯光年·小小世界 全部室內</li>
+      <li>遊行通常不因小雨取消，強降雨時 App 即時通知</li>
+      <li>Reach for the Stars 依天候可能取消，以 App 當日通知為準</li>
+      <li>輕便雨衣×4 台灣先買，比現場便宜一半</li>
+    </ul>
+  </div>
+
+  <div class="note-box">
+    <h4>👶 帶兩孩子的節奏控制</h4>
+    <ul>
+      <li>最晚 15:00 安排一段休息（小小世界 It's a Small World 超適合）</li>
+      <li>6歲孩子身高確認：Splash Mountain 需 90cm↑，Space Mountain 需 102cm↑</li>
+      <li>孩子名牌（姓名＋手機號）掛衣服裡面，今天一定要掛</li>
+      <li>走失應對：找穿迪士尼制服的 Cast Member，說「<b>迷子です（まいごです）</b>」</li>
+    </ul>
+  </div>
+
+  <div class="note-box">
+    <h4>📱 出發前在台灣完成</h4>
+    <ul>
+      <li>下載「東京ディズニーリゾート公式アプリ」（Tokyo Disney Resort App）</li>
+      <li>兩支手機都登入同一帳號，綁定訂單 <b>A00580296879</b></li>
+      <li>先熟悉 DPA 購買和 PP 搶票畫面流程</li>
+      <li>Crystal Palace Restaurant → Priority Seating → 訂 11:30 午餐</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ BUDGET ═══════════════ -->
+<section id="budget" class="section">
+  <h2 class="section-title"><span class="ico">💰</span> Day 4 費用總覽</h2>
+
+  <div class="card">
+    <div class="budget-row paid">
+      <span class="label">門票（4人）✅ 已付</span>
+      <span class="amount">¥30,000 · NT$6,300</span>
+    </div>
+    <div class="budget-row">
+      <span class="label">DPA · Beauty and the Beast（4人）</span>
+      <span class="amount">¥6,000 · NT$1,260</span>
+    </div>
+    <div class="budget-row">
+      <span class="label">午餐 Crystal Palace Restaurant（4人）</span>
+      <span class="amount">¥15,600 · NT$3,276</span>
+    </div>
+    <div class="budget-row">
+      <span class="label">晚餐（估）</span>
+      <span class="amount">¥8,000 · NT$1,680</span>
+    </div>
+    <div class="budget-row">
+      <span class="label">爆米花桶＋零食點心</span>
+      <span class="amount">¥4,000 · NT$840</span>
+    </div>
+    <div class="budget-row">
+      <span class="label">限定商品紀念品</span>
+      <span class="amount">¥5,000–10,000 · NT$1,050–2,100</span>
+    </div>
+    <div class="budget-row total">
+      <span class="label">全日合計（不含已付門票）</span>
+      <span class="amount">約¥38,600–43,600<br><small>NT$8,106–9,156</small></span>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:8px 0 4px;font-size:11.5px;color:var(--muted)">
+    匯率 ¥1 ≈ NT$0.21｜DPA 為最低估計（含美女與野獸1次）
+  </div>
+</section>
+
+<footer>
+  🗓️ 2026 / 6 / 24（三）· 東京迪士尼樂園 · Day 4<br>
+  訂單 A00580296879 · 表演時間以入園當天 App 為準
+</footer>
+
+</body>
+</html>
