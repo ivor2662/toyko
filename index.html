@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🇯🇵 東京親子遊 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #0e1628;
+  --navy2:   #16213e;
+  --navy3:   #1e2f5a;
+  --red:     #c0392b;
+  --red2:    #e74c3c;
+  --gold:    #d4a832;
+  --gold2:   #f0d080;
+  --white:   #f5f2ec;
+  --muted:   rgba(245,242,236,.45);
+  --border:  rgba(245,242,236,.10);
+  --radius:  18px;
+  --r-sm:    10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  min-height: 100dvh;
+  padding-bottom: 40px;
+  overflow-x: hidden;
+}
+
+/* ── TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.012) 0px,
+      rgba(255,255,255,.012) 1px,
+      transparent 1px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.012) 0px,
+      rgba(255,255,255,.012) 1px,
+      transparent 1px,
+      transparent 40px
+    );
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: 52px 20px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(192,57,43,.22) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(212,168,50,.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Japan circle motif */
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  border: 1px solid rgba(192,57,43,.12);
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.flag {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 14px;
+  position: relative;
+  animation: fadeDown .5s ease both;
+}
+
+.hero-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(28px, 7.5vw, 42px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: .03em;
+  position: relative;
+  animation: fadeDown .55s .08s ease both;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--gold2);
+}
+
+.hero-sub {
+  font-size: 12px;
+  letter-spacing: .18em;
+  color: var(--muted);
+  margin-top: 10px;
+  text-transform: uppercase;
+  font-family: 'DM Mono', monospace;
+  animation: fadeDown .55s .15s ease both;
+}
+
+/* ── COUNTDOWN ── */
+.countdown-wrap {
+  position: relative; z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 28px 20px 0;
+  animation: fadeDown .6s .22s ease both;
+}
+
+.cd-box {
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  text-align: center;
+  min-width: 62px;
+}
+
+.cd-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--gold2);
+  line-height: 1;
+  display: block;
+}
+
+.cd-label {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: .1em;
+  margin-top: 4px;
+  display: block;
+}
+
+.cd-sep {
+  display: flex;
+  align-items: center;
+  padding-bottom: 18px;
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.cd-gone {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: .1em;
+  text-align: center;
+  margin-top: 6px;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── MAIN NAV CARDS ── */
+.nav-section {
+  position: relative; z-index: 1;
+  padding: 32px 18px 0;
+}
+
+.nav-label {
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-family: 'DM Mono', monospace;
+}
+
+.main-card {
+  display: block;
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  margin-bottom: 14px;
+  text-decoration: none;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: transform .15s, box-shadow .15s;
+  animation: fadeUp .6s ease both;
+}
+
+.main-card:active {
+  transform: scale(.97);
+}
+
+.main-card.itinerary {
+  background: linear-gradient(135deg, #1a2f5e 0%, #0e1e3d 60%, #1a1a2e 100%);
+  border: 1px solid rgba(212,168,50,.25);
+  animation-delay: .3s;
+}
+
+.main-card.disney {
+  background: linear-gradient(135deg, #2a0d3a 0%, #1a0828 60%, #0a0514 100%);
+  border: 1px solid rgba(181,100,255,.25);
+  animation-delay: .38s;
+}
+
+/* Card shimmer line */
+.main-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.main-card.itinerary::before {
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.main-card.disney::before {
+  background: linear-gradient(90deg, transparent, #b57cff, transparent);
+}
+
+/* Decorative kanji */
+.main-card::after {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 100px;
+  font-weight: 900;
+  position: absolute;
+  right: -8px; bottom: -20px;
+  opacity: .05;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.main-card.itinerary::after { content: '旅'; }
+.main-card.disney::after    { content: '夢'; }
+
+.card-icon {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: .02em;
+}
+
+.card-sub {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: .05em;
+}
+
+.card-arrow {
+  position: absolute;
+  right: 20px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  opacity: .35;
+  transition: opacity .15s, transform .15s;
+}
+
+.main-card:active .card-arrow {
+  opacity: .8;
+  transform: translateY(-50%) translateX(4px);
+}
+
+.card-tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: .08em;
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+.main-card.itinerary .card-tag {
+  background: rgba(212,168,50,.15);
+  border: 1px solid rgba(212,168,50,.3);
+  color: var(--gold2);
+}
+
+.main-card.disney .card-tag {
+  background: rgba(181,100,255,.15);
+  border: 1px solid rgba(181,100,255,.3);
+  color: #d09fff;
+}
+
+/* ── DAYS STRIP ── */
+.days-section {
+  position: relative; z-index: 1;
+  padding: 28px 18px 0;
+  animation: fadeUp .6s .5s ease both;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.day-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 4px 8px;
+  text-decoration: none;
+  color: var(--white);
+  cursor: pointer;
+  transition: background .15s, border-color .15s, transform .12s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.day-pill:active {
+  transform: scale(.93);
+  background: var(--navy3);
+  border-color: var(--gold);
+}
+
+.day-pill.special {
+  border-color: rgba(192,57,43,.4);
+  background: linear-gradient(160deg, rgba(192,57,43,.12), var(--navy2));
+}
+
+.day-pill.disney-day {
+  border-color: rgba(181,100,255,.4);
+  background: linear-gradient(160deg, rgba(181,100,255,.12), var(--navy2));
+}
+
+.dp-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--gold2);
+}
+
+.day-pill.disney-day .dp-num { color: #d09fff; }
+
+.dp-emoji {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.dp-date {
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: .04em;
+  line-height: 1;
+}
+
+.dp-theme {
+  font-size: 9px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+/* ── INFO STRIP ── */
+.info-section {
+  position: relative; z-index: 1;
+  padding: 24px 18px 0;
+  animation: fadeUp .6s .62s ease both;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.info-card {
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 14px;
+}
+
+.info-title {
+  font-size: 10px;
+  letter-spacing: .15em;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 8px;
+}
+
+.info-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--white);
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.info-line:last-child { margin-bottom: 0; }
+
+.info-line .dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ── QUICK TIPS ── */
+.tips-section {
+  position: relative; z-index: 1;
+  padding: 24px 18px 0;
+  animation: fadeUp .6s .72s ease both;
+}
+
+.tip-list {
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.tip-item:last-child { border-bottom: none; }
+
+.tip-icon { font-size: 17px; flex-shrink: 0; margin-top: 1px; }
+
+.tip-text { color: rgba(245,242,236,.8); }
+
+.tip-text strong { color: var(--white); }
+
+/* ── FOOTER ── */
+.footer {
+  position: relative; z-index: 1;
+  text-align: center;
+  padding: 30px 20px 10px;
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  color: var(--muted);
+  letter-spacing: .1em;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 28px 18px 0;
+  position: relative; z-index: 1;
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <span class="flag">🇯🇵</span>
+  <h1 class="hero-title">東京<em>親子遊</em><br>2026</h1>
+  <p class="hero-sub">TOKYO FAMILY TRIP · JUN 21–27</p>
+</header>
+
+<!-- COUNTDOWN -->
+<div class="countdown-wrap" id="countdown-wrap">
+  <div class="cd-box"><span class="cd-num" id="cd-d">--</span><span class="cd-label">天</span></div>
+  <div class="cd-sep">:</div>
+  <div class="cd-box"><span class="cd-num" id="cd-h">--</span><span class="cd-label">時</span></div>
+  <div class="cd-sep">:</div>
+  <div class="cd-box"><span class="cd-num" id="cd-m">--</span><span class="cd-label">分</span></div>
+</div>
+<p class="cd-gone" id="cd-label">距出發倒數</p>
+
+<!-- MAIN NAV -->
+<div class="nav-section">
+  <p class="nav-label">快速導覽</p>
+
+  <a class="main-card itinerary" href="tokyo_2026_itinerary.html">
+    <span class="card-icon">🗺️</span>
+    <div class="card-title">7 天完整行程</div>
+    <div class="card-sub">航班 · 住宿 · 逐日行程 · 預算</div>
+    <span class="card-tag">6/21 – 6/27 · 7 Days</span>
+    <span class="card-arrow">›</span>
+  </a>
+
+  <a class="main-card disney" href="day4_disney.html">
+    <span class="card-icon">🎠</span>
+    <div class="card-title">迪士尼攻略</div>
+    <div class="card-sub">設施搶票 · 表演 · 美食 · 時間軸</div>
+    <span class="card-tag">Day 4 · 6/24（三）</span>
+    <span class="card-arrow">›</span>
+  </a>
+</div>
+
+<!-- DAYS STRIP -->
+<div class="days-section">
+  <p class="nav-label">逐日快查 → 點擊跳轉行程</p>
+  <div class="days-grid">
+
+    <a class="day-pill" href="tokyo_2026_itinerary.html#day1">
+      <span class="dp-num">1</span>
+      <span class="dp-emoji">✈️</span>
+      <span class="dp-date">6/21</span>
+      <span class="dp-theme">抵達上野</span>
+    </a>
+
+    <a class="day-pill special" href="tokyo_2026_itinerary.html#day2">
+      <span class="dp-num">2</span>
+      <span class="dp-emoji">🎭</span>
+      <span class="dp-date">6/22</span>
+      <span class="dp-theme">KidZania 台場</span>
+    </a>
+
+    <a class="day-pill" href="tokyo_2026_itinerary.html#day3">
+      <span class="dp-num">3</span>
+      <span class="dp-emoji">⛩️</span>
+      <span class="dp-date">6/23</span>
+      <span class="dp-theme">淺草 晴空塔</span>
+    </a>
+
+    <a class="day-pill disney-day" href="day4_disney.html">
+      <span class="dp-num">4</span>
+      <span class="dp-emoji">🎠</span>
+      <span class="dp-date">6/24</span>
+      <span class="dp-theme">迪士尼 樂園</span>
+    </a>
+
+    <a class="day-pill" href="tokyo_2026_itinerary.html#day5">
+      <span class="dp-num">5</span>
+      <span class="dp-emoji">🛍️</span>
+      <span class="dp-date">6/25</span>
+      <span class="dp-theme">幕張 澀谷</span>
+    </a>
+
+    <a class="day-pill special" href="tokyo_2026_itinerary.html#day6">
+      <span class="dp-num">6</span>
+      <span class="dp-emoji">🐋</span>
+      <span class="dp-date">6/26</span>
+      <span class="dp-theme">橫濱 八景島</span>
+    </a>
+
+    <a class="day-pill" href="tokyo_2026_itinerary.html#day7">
+      <span class="dp-num">7</span>
+      <span class="dp-emoji">🏠</span>
+      <span class="dp-date">6/27</span>
+      <span class="dp-theme">秋葉原 回國</span>
+    </a>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- INFO CARDS -->
+<div class="info-section">
+  <p class="nav-label">行程概要</p>
+  <div class="info-row">
+    <div class="info-card">
+      <div class="info-title">✈️ 航班</div>
+      <div class="info-line"><span class="dot"></span>去 JX800 08:30→12:55</div>
+      <div class="info-line"><span class="dot"></span>回 JX805 20:40→23:20</div>
+      <div class="info-line"><span class="dot"></span>星宇 · 成田 T2</div>
+    </div>
+    <div class="info-card">
+      <div class="info-title">🏨 住宿</div>
+      <div class="info-line"><span class="dot"></span>三井上野 6/21–23</div>
+      <div class="info-line"><span class="dot"></span>舞濱景觀 6/23–25</div>
+      <div class="info-line"><span class="dot"></span>三井上野 6/25–27</div>
+    </div>
+    <div class="info-card">
+      <div class="info-title">🎫 已付票券</div>
+      <div class="info-line"><span class="dot"></span>Skyliner 來回 ✅</div>
+      <div class="info-line"><span class="dot"></span>迪士尼 4 人 ✅</div>
+      <div class="info-line"><span class="dot"></span>KidZania ✅</div>
+    </div>
+    <div class="info-card">
+      <div class="info-title">💰 預算概估</div>
+      <div class="info-line"><span class="dot"></span>機票 NT$57,584</div>
+      <div class="info-line"><span class="dot"></span>住宿 NT$41,500</div>
+      <div class="info-line"><span class="dot"></span>總計約 NT$149k</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK TIPS -->
+<div class="tips-section">
+  <p class="nav-label">⚡ 出發前備忘</p>
+  <div class="tip-list">
+    <div class="tip-item">
+      <span class="tip-icon">📱</span>
+      <span class="tip-text"><strong>迪士尼 App</strong>  出發前下載並綁票（訂單 A00580296879）</span>
+    </div>
+    <div class="tip-item">
+      <span class="tip-icon">🃏</span>
+      <span class="tip-text"><strong>兒童 Suica</strong>  Day 1 上野站綠色窗口辦理，押金 ¥500×2</span>
+    </div>
+    <div class="tip-item">
+      <span class="tip-icon">☔</span>
+      <span class="tip-text"><strong>梅雨備品</strong>  輕便雨衣 ×4、備用鞋墊，台灣先買</span>
+    </div>
+    <div class="tip-item">
+      <span class="tip-icon">📶</span>
+      <span class="tip-text"><strong>eSIM</strong>  大人各一張，台灣用 WiFi 安裝好再出發</span>
+    </div>
+    <div class="tip-item">
+      <span class="tip-icon">⏰</span>
+      <span class="tip-text"><strong>回程硬底線</strong>  6/27 最晚 <strong>16:30</strong> 從上野搭 Skyliner</span>
+    </div>
+    <div class="tip-item">
+      <span class="tip-icon">👶</span>
+      <span class="tip-text"><strong>小孩名牌</strong>  姓名＋手機號碼，掛衣服內側</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  🇯🇵 TOKYO 2026 · 2大人＋2小孩 · JX800 / JX805
+</footer>
+
+<script>
+// ── COUNTDOWN ──
+(function () {
+  const target = new Date('2026-06-21T08:30:00+08:00').getTime();
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const now  = Date.now();
+    const diff = target - now;
+
+    const label = document.getElementById('cd-label');
+
+    if (diff <= 0) {
+      document.getElementById('cd-d').textContent = '00';
+      document.getElementById('cd-h').textContent = '00';
+      document.getElementById('cd-m').textContent = '00';
+      if (label) label.textContent = '✈️ 出發啦！一路順風！';
+      return;
+    }
+
+    const totalHours = Math.floor(diff / 3600000);
+    const days  = Math.floor(totalHours / 24);
+    const hours = totalHours % 24;
+    const mins  = Math.floor((diff % 3600000) / 60000);
+
+    document.getElementById('cd-d').textContent = pad(days);
+    document.getElementById('cd-h').textContent = pad(hours);
+    document.getElementById('cd-m').textContent = pad(mins);
+
+    if (label) {
+      if (days === 0 && hours < 3) {
+        label.textContent = '🚨 快去機場！';
+      } else if (days === 0) {
+        label.textContent = '🌅 今天就出發！';
+      } else {
+        label.textContent = `距 6/21 08:30 起飛倒數`;
+      }
+    }
+  }
+
+  tick();
+  setInterval(tick, 30000);
+})();
+</script>
+</body>
+</html>
